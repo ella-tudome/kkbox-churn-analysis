@@ -75,8 +75,6 @@ erDiagram
     }
 ```
 
-Before the analysis, I cleaned each table and checked which subscribers could be analysed. Registration dates were stored as millisecond timestamps rather than the documented date format and were converted. Two-thirds of ages were invalid and were set to null rather than guessed. I then built a one-row-per-subscriber table that measures each person's activity against the days they were actually a member between January and March 2017, so someone who joined in February is not compared against a full quarter.
-
 ---
 
 ## Executive Summary
