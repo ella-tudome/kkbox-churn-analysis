@@ -8,7 +8,7 @@ As a data analyst on the retention team, I analysed the 970,960 subscribers whos
 
 Insights and recommendations are provided on the following key areas:
 
-**Listening Behaviour:** Churners use the app the same way stayers do. Skip rate (19.19% vs 19.21%), listening time and engagement level all differ by **less than 4 percentage points**. Engagement metrics should not be used as the retention team's early-warning signal for churn.
+**Listening Behaviour:** Churners use the app the same way stayers do. Skip rate (17.2% vs 17.7%), listening time and engagement level all differ by **less than 4 percentage points**. Engagement metrics should not be used as the retention team's early-warning signal for churn.
 
 **Payment and Renewal:** Manual renewers churn at **30.57%**, compared with **3.83%** for auto-renew subscribers, an **8x gap** that holds even among subscribers who actively listen. KKBox is losing engaged users at the renewal step, so moving subscribers onto auto-renew is the most direct lever on churn.
 
@@ -16,9 +16,9 @@ Insights and recommendations are provided on the following key areas:
 
 **Revenue Opportunity and Tracking:** Under a conservative scenario, auto-renew on longer plans could retain an estimated **15,000+ subscribers** and recover **over $700K a year**. Three metrics would track whether a test delivers it: auto-renew adoption on longer plans (currently 0%), churn on longer plans (currently 90% to 99%, against a conservative target of 11.95%), and auto-renew conversion among the 64,713 manual monthly subscribers.
 
-The SQL queries used to inspect and clean the data for this analysis can be found here: [01_setup_and_cleaning.sql](sql/01_setup_and_cleaning.sql) and [02_data_quality_checks.sql](sql/02_data_quality_checks.sql).
+The SQL queries used to inspect and clean the data for this analysis can be found here: [01_setup_and_cleaning.sql](01_setup_and_cleaning.sql) and [02_data_quality_checks.sql](02_data_quality_checks.sql).
 
-Targeted SQL queries regarding various business questions can be found here: [03_user_level_table.sql](sql/03_user_level_table.sql) and [04_analysis.sql](sql/04_analysis.sql).
+Targeted SQL queries regarding various business questions can be found here: [03_user_level_table.sql](03_user_level_table.sql) and [04_analysis.sql](04_analysis.sql).
 
 An interactive Tableau story used to report the findings can be found here: [ADD TABLEAU PUBLIC LINK].
 
@@ -85,7 +85,7 @@ Before the analysis, I cleaned each table and checked which subscribers could be
 
 For the Head of Product: **how subscribers pay predicts churn far more than how they use the app.** Manual renewers churn at 8x the rate of auto-renew subscribers (30.57% vs 3.83%), while every listening measure separates churners from stayers by less than 4 percentage points. The gap comes from the product itself: auto-renew only exists on monthly plans, so subscribers on longer plans churn at 90% to 99%. Enabling auto-renew on those plans could recover an estimated **$700K+ in annual revenue** under conservative assumptions.
 
-[Visualization: snapshot of the Tableau story, `visuals/overview.png`]
+![Manual renewers churn at 8x the rate of auto-renew users](overview.png)
 
 ---
 
@@ -93,31 +93,31 @@ For the Head of Product: **how subscribers pay predicts churn far more than how 
 
 ### Listening Behaviour
 
-- **Churners skip songs at the same rate as stayers.** Across January to March 2017, the average skip rate (songs played less than 25% through) was 19.19% for stayers and 19.21% for churners. Within a listening session, the two groups behave the same.
+- **Churners skip songs at the same rate as stayers.** Across the 825,367 analysed subscribers between January and March 2017, the average skip rate (songs played less than 25% through) was 17.2% for churners and 17.7% for stayers. Within a listening session, the two groups behave the same.
 
-- **Churners listen just as long on the days they listen.** The median listening time on an active day was 83 minutes for stayers and 88 minutes for churners. Over the full quarter, total listening time differed by only about 5.5% (6,364 vs 6,026 minutes).
+- **Churners listen as much as stayers, or slightly more.** On the days they were active, churners listened for 109 minutes on average, against 101 for stayers. Over the full quarter, churners listened for 7.1K minutes and stayers for 6.4K. If dissatisfaction drove churn, we would expect the opposite.
 
 - **Churners are not less engaged.** Measured against the days they were actually members, churners were active on 54.3% of their days, compared with 50.4% for stayers. If anything, churners were slightly more active.
 
 - **Engagement level barely changes churn.** Grouped into Dormant (no active days), Light (active on under half their membership days) and Regular users, churn was 6.96%, 5.58% and 7.14%. The spread is under 2 percentage points, so usage is not a useful early-warning signal.
 
-[Visualization: `visuals/listening_behaviour.png`]
+![Churners aren't less engaged](listening_behaviour.png)
 
 ### Payment and Renewal
 
 - **Manual renewal is where subscribers are lost.** Based on each subscriber's latest transaction before 31 March 2017, manual renewers churned at 30.57% (82,894 users) and auto-renew subscribers at 3.83% (850,684 users): an 8x gap, and a 27-point difference against under 4 points for any usage measure.
 
-- **The gap holds even among engaged users.** Among subscribers who listened during the quarter, manual renewers still churned at 30.41%, against 3.55% for auto-renew. Keeping usage the same, the renewal method alone moves churn by almost 9x.
+- **The gap holds even among engaged users.** Among active subscribers, manual renewers still churned at 30.4% (82,700 users), against 3.5% for auto-renew (675,774 users). Keeping usage the same, the renewal method alone moves churn by almost 9x.
 
-- **Auto-renew keeps subscribers who never listen.** 172,397 subscribers never opened the app between January and March but stayed on auto-renew, and they churned at only 4.92%, below the 8.99% overall rate. This is passive renewal: the payment carries on without any engagement.
+- **Auto-renew keeps subscribers who don't listen.** 66,771 silent subscribers (no song played past halfway between January and March) stayed on auto-renew, and they churned at only 6.8%, below the 8.99% overall rate. This is passive renewal: the payment carries on without any engagement.
 
-- **Without auto-renew, non-listeners almost all leave.** The 209 subscribers who didn't listen and renewed manually churned at 93.78%. The group is small, but it shows the same pattern at its most extreme.
+- **Without auto-renew, silent subscribers almost all leave.** The 122 silent subscribers who renewed manually churned at 90.2%. The group is small, but it shows the same pattern at its most extreme.
 
-[Visualization: `visuals/payment_renewal.png`]
+![Losing people who want to use the app](payment_renewal.png)
 
 ### Plan Structure
 
-- **Longer plans churn more, not less.** Monthly auto-renew subscribers churned at 3.83% and monthly manual subscribers at 11.95%, while quarterly subscribers churned at 90.42% (4,208 users) and long-term subscribers at 99.26% (13,498 users).
+- **Longer plans churn more, not less.** Monthly auto-renew subscribers churned at 3.83% and monthly manual subscribers at 11.95%, while quarterly subscribers churned at 90.42% and long-term subscribers at 99.26%.
 
 - **Auto-renew does not exist beyond monthly plans.** Across the full transaction history, there were 162,451 transactions on plans of 90 to 410 days, and not one was set to auto-renew. On the 30-day plan, 1.12 million of 1.22 million transactions were.
 
@@ -125,7 +125,7 @@ For the Head of Product: **how subscribers pay predicts churn far more than how 
 
 - **Manual renewal alone doesn't explain the size of the gap.** Monthly manual renewers churn at 11.95%, far below the 90%+ on longer plans. Longer-plan subscribers have to make an active decision, with no default to fall back on, after a long gap since they last paid.
 
-[Visualization: `visuals/plan_structure.png`]
+![Auto-renew doesn't exist on non-monthly plans](plan_structure.png)
 
 ### Revenue Opportunity
 
@@ -142,7 +142,7 @@ For the Head of Product: **how subscribers pay predicts churn far more than how 
 | Conservative | 15,087 | $727,344 |
 | Optimistic | 16,525 | $796,641 |
 
-[Visualization: `visuals/revenue_opportunity.png`]
+<!-- Revenue chart to add: ![Revenue opportunity](revenue_opportunity.png) -->
 
 ---
 
