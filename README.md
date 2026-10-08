@@ -20,7 +20,7 @@ The SQL queries used to inspect and clean the data for this analysis can be foun
 
 Targeted SQL queries regarding various business questions can be found here: [03_user_level_table.sql](03_user_level_table.sql) and [04_analysis.sql](04_analysis.sql).
 
-An interactive Tableau story used to report the findings can be found here: [ADD TABLEAU PUBLIC LINK].
+The analysis was done in PostgreSQL, and the charts in this README were built in Tableau.
 
 ---
 
@@ -131,18 +131,18 @@ For the Head of Product: **how subscribers pay predicts churn far more than how 
 
 - **I sized the opportunity with two scenarios.** Monthly subscribers are the only group with auto-renew, so they served as the benchmark. The optimistic scenario assumes longer-plan subscribers would churn at the monthly auto-renew rate (3.83%). The conservative scenario assumes they would churn at the monthly manual rate (11.95%), meaning only the friction part of the gap can be recovered.
 
-- **Conservative estimate: 15,087 subscribers retained and $727,344 a year.** Of this, 11,785 subscribers and $569,633 come from long-term plans, and 3,302 subscribers and $157,712 from quarterly plans.
+- **Conservative estimate: 15,021 subscribers retained and about $728K a year.** Revenue kept from longer plans would rise from about $22K a year today to about $750K. Of the gain, about $570K comes from long-term plans and about $158K from quarterly plans.
 
-- **Optimistic estimate: 16,525 subscribers retained and $796,641 a year.** The two scenarios are close together because churn on longer plans is so high that most of it is recoverable either way.
+- **Optimistic estimate: 16,452 subscribers retained and about $798K a year.** The two scenarios are close together because churn on longer plans is so high that most of it is recoverable either way.
 
 - **Long-term plans hold most of the value.** Once annualised, a subscriber is worth about $48 a year on either plan type. Long-term plans matter more because they have over 3x as many subscribers and churn almost completely.
 
 | Scenario | Subscribers retained | Annual revenue recovered |
 |---|---|---|
-| Conservative | 15,087 | $727,344 |
-| Optimistic | 16,525 | $796,641 |
+| Conservative | 15,021 | ~$728K |
+| Optimistic | 16,452 | ~$798K |
 
-<!-- Revenue chart to add: ![Revenue opportunity](revenue_opportunity.png) -->
+![Auto-renew on longer plans could recover $700K+ a year](revenue_opportunity.png)
 
 ---
 
@@ -152,7 +152,7 @@ Based on the insights and findings above, we would recommend the **Product and R
 
 ### 1. Offer Auto-Renew on Longer Plans, Starting with Long-Term
 
-Subscribers on plans longer than 30 days churn at 90% to 99% because they have no way to auto-renew. The recommendation is to **add a recurring card payment option at purchase for long-term plans (13,498 subscribers, 99.26% churn)**, then extend it to **quarterly plans (4,208 subscribers, 90.42% churn)**. Long-term plans come first because they hold most of the opportunity: an estimated **$569,633 a year** under the conservative scenario, against **$157,712** for quarterly plans. For subscribers who keep paying at convenience stores or through network deals, add renewal reminders before the plan expires and an in-app option to switch to a recurring plan.
+Subscribers on plans longer than 30 days churn at 90% to 99% because they have no way to auto-renew. The recommendation is to **add a recurring card payment option at purchase for long-term plans (13,498 subscribers, 99.26% churn)**, then extend it to **quarterly plans (4,208 subscribers, 90.42% churn)**. Long-term plans come first because they hold most of the opportunity: an estimated **$570K a year** under the conservative scenario, against **$158K** for quarterly plans. For subscribers who keep paying at convenience stores or through network deals, add renewal reminders before the plan expires and an in-app option to switch to a recurring plan.
 
 ### 2. Test the Change and Track Three KPIs
 
