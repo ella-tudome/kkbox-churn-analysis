@@ -480,6 +480,11 @@ order by payment_plan_days;
 --
 -- Revenue is annualised per user: the amount paid on their latest plan,
 -- converted to USD (NTD / 30), scaled to 365 days by their own plan length.
+-- I used the latest transaction rather than the sum of all transactions
+-- because the latest plan is what a retained subscriber would renew into,
+-- and plan type and auto-renew status are also taken from that transaction.
+-- Summing a user's full history would inflate revenue for long-tenure users
+-- and measure tenure rather than the value of a renewal.
 -- Putting every plan on the same annual basis lets the two plan types be
 -- summed. The annual figure assumes a retained user stays for a full year.
 -- =====================================================
@@ -558,6 +563,14 @@ from results;
 --     conservative:  3,302 retained | $157,712 per year
 --
 --   Total: 15,087 to 16,525 users retained | $727,344 to $796,641 per year
+--
+-- Note on the Tableau chart: the revenue chart in the Tableau story and README
+-- is built from the user-level table (03_user_level_table.sql, 825,367 users),
+-- and measures "today" as the actual revenue of subscribers who stayed. On that
+-- basis the figures are: conservative 15,021 subscribers and ~$728K a year;
+-- optimistic 16,452 subscribers and ~$798K a year. The small difference from the
+-- results above comes from the slightly smaller user base. Both support the same
+-- conclusion: over $700K a year under conservative assumptions.
 --
 -- Annual revenue per user is almost identical across plan types (~$48), which
 -- is a useful sanity check: once annualised, a subscriber is worth about the
