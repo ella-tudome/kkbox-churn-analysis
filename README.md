@@ -10,11 +10,11 @@ Insights and recommendations are provided on the following key areas:
 
 **Listening Behaviour:** Churners use the app the same way stayers do. Skip rate (17.2% vs 17.7%), listening time and engagement level all differ by **less than 4 percentage points**. Engagement metrics should not be used as the retention team's early-warning signal for churn.
 
-**Payment and Renewal:** Manual renewers churn at **30.57%**, compared with **3.83%** for auto-renew subscribers, an **8x gap** that holds even among subscribers who actively listen. KKBox is losing engaged users at the renewal step, so moving subscribers onto auto-renew is the most direct lever on churn.
+**Payment and Renewal:** Manual renewers churn at **30.5%**, compared with **3.8%** for auto-renew subscribers, an **8x gap** that holds even among subscribers who actively listen. KKBox is losing engaged users at the renewal step, so moving subscribers onto auto-renew is the most direct lever on churn.
 
 **Plan Structure:** Auto-renew only exists on monthly plans. Not one of **162,451 longer-plan transactions** was on auto-renew, and those subscribers churn at **90% to 99%**. Offering auto-renew on quarterly and long-term plans closes a gap that comes from how the product is built, not from what subscribers want.
 
-**Revenue Opportunity and Tracking:** Under a conservative scenario, auto-renew on longer plans could retain an estimated **15,000+ subscribers** and recover **over $700K a year**. Three metrics would track whether a test delivers it: auto-renew adoption on longer plans (currently 0%), churn on longer plans (currently 90% to 99%, against a conservative target of 11.95%), and auto-renew conversion among the 64,713 manual monthly subscribers.
+**Revenue Opportunity and Tracking:** Under a conservative scenario, auto-renew on longer plans could retain an estimated **15,000+ subscribers** and recover **over $700K a year**. Three metrics would track whether a test delivers it: auto-renew adoption on longer plans (currently 0%), churn on longer plans (currently 90% to 99%, against a conservative target of 11.95%), and auto-renew conversion among the 64,691 manual monthly subscribers.
 
 The SQL queries used to inspect and clean the data for this analysis can be found here: [01_setup_and_cleaning.sql](01_setup_and_cleaning.sql) and [02_data_quality_checks.sql](02_data_quality_checks.sql).
 
@@ -83,7 +83,7 @@ Before the analysis, I cleaned each table and checked which subscribers could be
 
 ### Overview of Findings
 
-For the Head of Product: **how subscribers pay predicts churn far more than how they use the app.** Manual renewers churn at 8x the rate of auto-renew subscribers (30.57% vs 3.83%), while every listening measure separates churners from stayers by less than 4 percentage points. The gap comes from the product itself: auto-renew only exists on monthly plans, so subscribers on longer plans churn at 90% to 99%. Enabling auto-renew on those plans could recover an estimated **$700K+ in annual revenue** under conservative assumptions.
+For the Head of Product: **how subscribers pay predicts churn far more than how they use the app.** Manual renewers churn at 8x the rate of auto-renew subscribers (30.5% vs 3.8%), while every listening measure separates churners from stayers by less than 4 percentage points. The gap comes from the product itself: auto-renew only exists on monthly plans, so subscribers on longer plans churn at 90% to 99%. Enabling auto-renew on those plans could recover an estimated **$700K+ in annual revenue** under conservative assumptions.
 
 ![Manual renewers churn at 8x the rate of auto-renew users](overview.png)
 
@@ -105,7 +105,7 @@ For the Head of Product: **how subscribers pay predicts churn far more than how 
 
 ### Payment and Renewal
 
-- **Manual renewal is where subscribers are lost.** Based on each subscriber's latest transaction before 31 March 2017, manual renewers churned at 30.57% (82,894 users) and auto-renew subscribers at 3.83% (850,684 users): an 8x gap, and a 27-point difference against under 4 points for any usage measure.
+- **Manual renewal is where subscribers are lost.** Based on each subscriber's latest transaction before 31 March 2017, manual renewers churned at 30.5% and auto-renew subscribers at 3.8%: an 8x gap, and a 26.7-point difference against under 4 points for any usage measure.
 
 - **The gap holds even among engaged users.** Among active subscribers, manual renewers still churned at 30.4% (82,700 users), against 3.5% for auto-renew (675,774 users). Keeping usage the same, the renewal method alone moves churn by almost 9x.
 
@@ -117,7 +117,7 @@ For the Head of Product: **how subscribers pay predicts churn far more than how 
 
 ### Plan Structure
 
-- **Longer plans churn more, not less.** Monthly auto-renew subscribers churned at 3.83% and monthly manual subscribers at 11.95%, while quarterly subscribers churned at 90.42% and long-term subscribers at 99.26%.
+- **Longer plans churn more, not less.** Monthly auto-renew subscribers churned at 3.83% and monthly manual subscribers at 11.95%, while quarterly subscribers churned at 90.3% and long-term subscribers at 99.3%.
 
 - **Auto-renew does not exist beyond monthly plans.** Across the full transaction history, there were 162,451 transactions on plans of 90 to 410 days, and not one was set to auto-renew. On the 30-day plan, 1.12 million of 1.22 million transactions were.
 
@@ -152,7 +152,7 @@ Based on the insights and findings above, we would recommend the **Product and R
 
 ### 1. Offer Auto-Renew on Longer Plans, Starting with Long-Term
 
-Subscribers on plans longer than 30 days churn at 90% to 99% because they have no way to auto-renew. The recommendation is to **add a recurring card payment option at purchase for long-term plans (13,498 subscribers, 99.26% churn)**, then extend it to **quarterly plans (4,208 subscribers, 90.42% churn)**. Long-term plans come first because they hold most of the opportunity: an estimated **$570K a year** under the conservative scenario, against **$158K** for quarterly plans. For subscribers who keep paying at convenience stores or through network deals, add renewal reminders before the plan expires and an in-app option to switch to a recurring plan.
+Subscribers on plans longer than 30 days churn at 90% to 99% because they have no way to auto-renew. The recommendation is to **add a recurring card payment option at purchase for long-term plans (13,473 subscribers, 99.3% churn)**, then extend it to **quarterly plans (4,166 subscribers, 90.3% churn)**. Long-term plans come first because they hold most of the opportunity: an estimated **$570K a year** under the conservative scenario, against **$158K** for quarterly plans. For subscribers who keep paying at convenience stores or through network deals, add renewal reminders before the plan expires and an in-app option to switch to a recurring plan.
 
 ### 2. Test the Change and Track Three KPIs
 
@@ -164,7 +164,7 @@ The revenue estimates are scenarios, not guaranteed outcomes, so the change shou
 
 ### 3. Convert Manual Monthly Subscribers to Auto-Renew
 
-Even on monthly plans, where auto-renew already exists, the **64,713 subscribers who renew manually churn at 11.95%, more than 3x the 3.83% rate for auto-renew subscribers**. The recommendation is to **prompt manual monthly subscribers to switch to auto-renew**, for example at the point of renewal or after a period of regular listening. Closing that gap would keep an estimated **5,250 more subscribers**, without any change to how plans are built.
+Even on monthly plans, where auto-renew already exists, the **64,691 subscribers who renew manually churn at 11.95%, more than 3x the 3.83% rate for auto-renew subscribers**. The recommendation is to **prompt manual monthly subscribers to switch to auto-renew**, for example at the point of renewal or after a period of regular listening. Closing that gap would keep an estimated **5,250 more subscribers**, without any change to how plans are built.
 
 ---
 
