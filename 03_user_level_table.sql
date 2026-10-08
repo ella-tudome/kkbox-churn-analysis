@@ -19,6 +19,7 @@ WITH last_txn AS (
         transaction_date,
         membership_expire_date,
         payment_plan_days,
+        actual_amount_paid,
         ROW_NUMBER() OVER (PARTITION BY msno ORDER BY transaction_date DESC) AS rn
     FROM transactions
     WHERE transaction_date <= '2017-03-31'
@@ -39,6 +40,7 @@ exposure AS (
         lt.transaction_date,
         lt.membership_expire_date,
         lt.payment_plan_days,
+        lt.actual_amount_paid,
         m.registration_init_time,
         GREATEST('2017-01-01', m.registration_init_time) AS start_date,
         LEAST('2017-03-31', lt.membership_expire_date) AS end_date,
@@ -78,6 +80,13 @@ SELECT
     e.is_auto_renew,
     e.transaction_date,
     e.payment_plan_days,
+
+    -- actual_amount_paid: NTD paid on the user's latest plan, used for the
+    -- revenue opportunity estimate. I took the latest transaction rather than
+    -- summing all of a user's transactions because it is the plan they would
+    -- renew into, it matches how plan type and auto-renew are defined here, and
+    -- summing would inflate revenue for long-tenure users with many transactions.
+    e.actual_amount_paid,
     e.possible_exposure_days,
     a.active_days,
 
